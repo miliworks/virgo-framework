@@ -1,15 +1,9 @@
 package com.miliworks.virgo.test;
 
+import com.mongodb.*;
+
 import java.net.UnknownHostException;
 import java.util.List;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.Mongo;
-import com.mongodb.util.JSON;
 
 public class DataDao {
 	private static DataDao _instance = null;
@@ -31,13 +25,13 @@ public class DataDao {
 		try {
 			mg = new Mongo("localhost", 10001);
 
-			// 查询所有的Database
+			// Database
 			for (String name : mg.getDatabaseNames()) {
 				System.out.println("mongodb dbName: " + name);
 			}
 
 			DB db = mg.getDB("data");
-			// 查询所有的聚集集合
+			//
 			for (String name : db.getCollectionNames()) {
 				System.out.println("mongodb collectionName: " + name);
 			}
@@ -54,7 +48,7 @@ public class DataDao {
 	}
 
 	public List<Content> queryAll() {
-		// 查询所有的数据
+		//
 		DBCursor cur = contents.find();
 		while (cur.hasNext()) {
 			System.out.println(cur.next());
